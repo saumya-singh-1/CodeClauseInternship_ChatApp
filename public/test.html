@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Socket.IO Test</title>
+</head>
+<body>
+  <h1>Socket.IO Connection Test</h1>
+  <div id="status">Connecting...</div>
+  <button onclick="testJoin()">Test Join Room</button>
+  <div id="log"></div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    const socket = io();
+    const status = document.getElementById('status');
+    const log = document.getElementById('log');
+
+    function addLog(message) {
+      log.innerHTML += '<div>' + new Date().toLocaleTimeString() + ': ' + message + '</div>';
+    }
+
+    socket.on('connect', () => {
+      status.textContent = 'Connected!';
+      addLog('Connected to server');
+    });
+
+    socket.on('disconnect', () => {
+      status.textContent = 'Disconnected';
+      addLog('Disconnected from server');
+    });
+
+    socket.on('room-joined', (data) => {
+      addLog('Room joined: ' + JSON.stringify(data));
+    });
+
+    socket.on('error', (error) => {
+      addLog('Error: ' + error);
+    });
+
+    function testJoin() {
+      addLog('Attempting to join room: test, user: testuser');
+      socket.emit('join-room', 'test', 'testuser');
+    }
+  </script>
+</body>
+</html> 

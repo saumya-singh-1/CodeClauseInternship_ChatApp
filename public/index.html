@@ -2,32 +2,172 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Chat Rooms</title>
-  <style>
-    body { font-family: Arial; margin: 20px; }
-    #chat { display: none; }
-    #messages { 
-      border: 1px solid #ccc; 
-      height: 300px; 
-      overflow-y: scroll; 
-      padding: 10px; 
-      margin-bottom: 10px;
-    }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Modern Chat Rooms</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/emoji-mart@latest/css/emoji-mart.css" rel="stylesheet" />
 </head>
 <body>
-  <div id="join">
-    <h2>Join a Chat Room</h2>
-    <input id="username" placeholder="Enter your name" />
-    <input id="room" placeholder="Enter room name" />
-    <button onclick="joinRoom()">Join</button>
+  <div class="container">
+    <!-- Join Room Section -->
+    <div id="join" class="join-section">
+      <div class="join-header">
+        <div class="theme-toggle">
+          <button id="theme-toggle" class="theme-btn">
+            <i class="fas fa-moon"></i>
+          </button>
+        </div>
+        <i class="fas fa-comments"></i>
+        <h1>Welcome to Chat Rooms</h1>
+        <p>Join a room and start chatting with others!</p>
+      </div>
+      
+      <form id="join-form" class="join-form">
+        <div class="input-group">
+          <i class="fas fa-user"></i>
+          <input 
+            id="username" 
+            type="text" 
+            placeholder="Enter your name" 
+            required 
+            autocomplete="off"
+            maxlength="20"
+          />
+        </div>
+        
+        <div class="input-group">
+          <i class="fas fa-door-open"></i>
+          <input 
+            id="room" 
+            type="text" 
+            placeholder="Enter room name" 
+            required 
+            autocomplete="off"
+            maxlength="30"
+          />
+        </div>
+
+        <div class="room-suggestions">
+          <p>Popular rooms:</p>
+          <div class="suggestion-tags">
+            <span class="tag" data-room="general">#general</span>
+            <span class="tag" data-room="random">#random</span>
+            <span class="tag" data-room="help">#help</span>
+            <span class="tag" data-room="tech">#tech</span>
+          </div>
+        </div>
+        
+        <button type="submit" class="join-btn">
+          <i class="fas fa-sign-in-alt"></i>
+          Join Room
+        </button>
+      </form>
+    </div>
+
+    <!-- Chat Section -->
+    <div id="chat" class="chat-section">
+      <div class="chat-header">
+        <div class="room-info">
+          <h2><i class="fas fa-hashtag"></i> <span id="room-name"></span></h2>
+          <p id="user-count">0 users online</p>
+        </div>
+        <div class="header-actions">
+          <button id="toggle-sidebar" class="sidebar-btn">
+            <i class="fas fa-users"></i>
+          </button>
+          <button id="leave-room" class="leave-btn">
+            <i class="fas fa-sign-out-alt"></i>
+            Leave
+          </button>
+        </div>
+      </div>
+      
+      <div class="chat-container">
+        <div class="sidebar" id="sidebar">
+          <div class="sidebar-header">
+            <h3>Online Users</h3>
+            <button id="close-sidebar" class="close-btn">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+          <div class="users-list" id="users-list">
+            <!-- Users will be populated here -->
+          </div>
+        </div>
+
+        <div class="main-chat">
+          <div id="messages" class="messages-container"></div>
+          
+          <div class="typing-indicator" id="typing-indicator">
+            <span class="typing-text">Someone is typing...</span>
+            <div class="typing-dots">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          </div>
+          
+          <form id="message-form" class="message-form">
+            <div class="message-input-container">
+              <div class="input-actions">
+                <button type="button" id="emoji-btn" class="action-btn" title="Add emoji">
+                  <i class="fas fa-smile"></i>
+                </button>
+                <button type="button" id="file-btn" class="action-btn" title="Attach file">
+                  <i class="fas fa-paperclip"></i>
+                </button>
+                <input type="file" id="file-input" accept="image/*,.pdf,.doc,.docx,.txt" style="display: none;" />
+              </div>
+              
+              <div class="input-group">
+                <textarea 
+                  id="message-input" 
+                  placeholder="Type your message..." 
+                  autocomplete="off"
+                  maxlength="1000"
+                  rows="1"
+                ></textarea>
+                <div class="char-counter" id="char-counter">0/1000</div>
+                <button type="submit" class="send-btn" title="Send message" id="send-btn">
+                  <i class="fas fa-paper-plane"></i>
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <div id="chat">
-    <h2>Room: <span id="room-name"></span></h2>
-    <div id="messages"></div>
-    <input id="message-input" placeholder="Type your message..." />
-    <button onclick="sendMessage()">Send</button>
+  <!-- Emoji Picker Modal -->
+  <div id="emoji-modal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Choose Emoji</h3>
+        <button class="close-btn" id="close-emoji">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="emoji-grid">
+        <!-- Emojis will be populated here -->
+      </div>
+    </div>
+  </div>
+
+  <!-- File Preview Modal -->
+  <div id="file-modal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>File Preview</h3>
+        <button class="close-btn" id="close-file">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="file-preview" id="file-preview">
+        <!-- File preview will be shown here -->
+      </div>
+    </div>
   </div>
 
   <!-- Socket.IO -->
