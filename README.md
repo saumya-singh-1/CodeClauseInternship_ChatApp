@@ -1,40 +1,63 @@
-# 💬 Modern Chat App 🚀
+# 💬 Real-Time Chat App
 
-A simple real-time chat application built as part of my CodeClause Internship project.  
-It allows users to join rooms and send messages instantly using **Socket.IO**.
+This project was developed as part of my **CodeClause Internship**.  
+It is a simple **real-time chat application** built with **Node.js, Express, and Socket.IO**.  
+The app allows users to join rooms, send messages instantly, and see system updates when members join or leave.
+
+---
 
 ## ✨ Features
-- Real-time messaging
-- Join custom chat rooms
-- See who is online in the room
-- Simple, responsive UI
-- Instant updates (join/leave notifications)
 
-## 🛠 Tech Stack
-- **Backend:** Node.js, Express.js
-- **Realtime:** Socket.IO
-- **Frontend:** HTML, CSS, JavaScript
+- Real-time messaging powered by **Socket.IO**
+- Room-based chat system (create or join rooms)
+- System notifications for joins/leaves
+- Responsive design (works on desktop & mobile)
+- **Dark Mode support** 🌙
+- **Emoji support** 😀 (send and display emojis in chat)
+- **Media/file sharing** 📎 (share images, documents, etc.)
+- Clean, minimal, modern design 
 
-## 🌐 Live Demo
-👉 [Try it here](https://codeclauseinternship-chatapp.onrender.com)
+---
 
-## ⚙️ Run Locally
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/saumya-singh-1/CodeClauseInternship_ChatApp.git
-   cd CodeClauseInternship_ChatApp
+## 🚀 Live Demo
 
-2. Install Dependencies:
-   ```bash
-   npm install
-   ```
+🔗 [View Live Project](https://codeclauseinternship-chatapp.onrender.com)  
+🔗 [GitHub Repository](https://github.com/saumya-singh-1/CodeClauseInternship_ChatApp)
 
-3. Start the server:
-   ```bash
-   node server.js
-   ```
+---
 
-4. Open [localhost:3000](http://localhost:3000) in your browser.
+## 🛠️ Built With
 
-✨ Built during my CodeClause Web Development Internship 🚀
+- [Node.js](https://nodejs.org)  
+- [Express.js](https://expressjs.com)  
+- [Socket.IO](https://socket.io)  
+- [HTML5, CSS3, JavaScript](https://developer.mozilla.org/en-US/docs/Web)
 
+---
+
+## 📸 Screenshots
+
+### Join Room Page  
+![Join Room Screenshot](./screenshots/chatapp-ss1.jpg)
+![Join Room Screenshot (dark mode)](./screenshots/chatapp-ss2.jpg)
+
+### Chat Room Example  
+![Chat Room Screenshot](./screenshots/chatapp-ss3.jpg)
+
+### Mobile View  
+![Mobile View Screenshot](./screenshots/chatapp-ss4.jpg)
+![Mobile View Screenshot (dark mode)](./screenshots/chatapp-ss5.jpg)
+
+---
+## 👨‍💻 Author
+
+- **Saumya Singh**  
+  GitHub: [@saumya-singh-1](https://github.com/saumya-singh-1)  
+  LinkedIn: [@saumyasingh](www.linkedin.com/in/saumya-singh-946b63321/)  
+
+---
+
+## 🎯 Internship Note
+
+This project was built as part of the **CodeClause Internship Program (2025)**.  
+It helped me practice **real-time communication, backend development, and responsive UI design**.  
